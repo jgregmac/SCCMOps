@@ -1,0 +1,259 @@
+<job id="zUVMSetDriverCategories">
+<script language="VBScript" src="ZTIUtility.vbs"/>
+<script language="VBScript">
+
+Option Explicit
+RunNewInstance
+
+'//--------------------------------------------------------
+'// Main Class
+'//--------------------------------------------------------
+Class zUVMSetDriverCategories
+    
+	'//?????????????????????????-
+	'//  Constructor to initialize needed global objects
+	'//?????????????????????????-
+    Private Sub Class_Initialize
+    End Sub
+    
+    '//--------------------------------------------------------
+    '// Main routine
+    '//--------------------------------------------------------
+
+    Function Main()
+    ' //*******************************************************
+    ' //
+    ' // File: ZUVMSetDriverCategories.wsf
+    ' //
+    ' // Purpose: Script to configure the driver categories to be applied to the 
+    ' //   operating system in the running task sequence.  Reads driver category 
+    ' //   and OS Image information from files generated in PowerShell.
+    ' //
+    ' // Usage: cscript zUVM-SetDriverCategories.wsf [/Model:ComputerModel] [/OSDImageName:WIMImageName] [/debug:true]
+	' //     Model and OSDImageName arguments are for debugging, and will override the variables in the current deployment environment.
+    ' //
+    ' //*******************************************************
+
+    ' Idea is to update the list of driver categories to be applied against an operating system during the "Auto Apply Drivers" TS step:
+    '       https://technet.microsoft.com/en-us/library/hh273365.aspx
+    '       https://technet.microsoft.com/en-us/library/dd252750.aspx
+    '       (Note we will attempt to set the OSDAutoApplyDriverCategoryList, which claims to be a comma-delimited list, not array)
+    ' Following guidance in MSDN:
+    '       https://msdn.microsoft.com/en-us/library/jj217814.aspx
+    '       But this is totally unnecessary because we have MDT and the "oEnvironment" object!!!!
+    ' And sample code provided by Ben Hunter, Deployment Guy:
+    '       http://blogs.technet.com/b/deploymentguys/archive/2008/04/18/configuration-manager-dynamic-driver-categories.aspx
+    '       Which shows how we can set the driver categories, but his script actually logs in to configuration manager to gather the categories on each run.
+    '       We don't do that because it would be slow, and would require exposing server ports and server credentials to the WinPE client.  Bad!
+
+        Dim catFile, catFilePath, csProp, dict_key, imageFile, imageFilePath, OSDImageName, Make, Model, myCat, Out, WinVer 'String variables
+        Dim driverCats, OSImages, oMatch, oRegEx 'Objects
+		Dim i, iRetVal
+
+        Set driverCats = createObject("Scripting.Dictionary")
+        Set OSImages = createObject("Scripting.Dictionary")
+		
+		'Set initial value for "UVMDriverCatSet".  We will set this to "YES" if we find a matching driver category later.
+		oEnvironment.Item("UVMDriverCatSet") = "NO"
+
+        catFile = "zUVM-DriverCategories.csv"
+        imageFile = "zUVM-OSImages.csv"
+		
+		'Test to see if image/driver information files are present.  Exit if they cannot be found.
+		'These two if clauses should be implemented as functions.
+		iRetVal = oUtility.FindFile(catFile, catFilePath)
+		if iRetVal <> Success then
+			oLogging.CreateEntry catFile & " file not found. ", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		end if 
+		oLogging.CreateEntry "Path to " & catFile &": " & catFilePath, LogTypeInfo
+
+		iRetVal = oUtility.FindFile(imageFile, imageFilePath)
+		if iRetVal <> Success then
+			oLogging.CreateEntry imageFile & " file not found. ", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		end if 
+		oLogging.CreateEntry "Path to " & imageFile &": " & imageFilePath, LogTypeInfo
+		
+        'Load the information from the files into scripting dictionary objects.
+		call load_dict(driverCats,catFilePath)
+        call load_dict(OSImages,imageFilePath)
+		
+		'The following two If clauses could be implemented as functions... I'll do that when I have time (Ha!).
+		'Let's just use MDT to get Model information:
+		
+		'Maybe MDT can fetch this info for us?
+		'Supply a valid image name in the /OSDImageName: argument, such as "Windows 8.1 Update 1 64-bit with Office 2013" for debugging
+		If Wscript.arguments.named.Exists("OSDImageName") Then
+			Out = "OSDImageName argument provided on the command line. Setting OSDImageName to the supplied argument instead."
+			oLogging.CreateEntry Out, LogTypeWarning
+			OSDImageName =  Wscript.arguments.named.Item("OSDImageName")
+		Else
+			OSDImageName = oEnvironment.Item("OSDImageName")
+		End If
+		
+		'Special handling for the OSDImageName variable... the script should not continue if OSDImageName still is not defined.
+		'wscript.echo "OSDImageName is of length: " & Len(OSDImageName)
+		oLogging.CreateEntry "Selected OSDImageName now is: " & OSDImageName, LogTypeInfo
+		If Len(OSDImageName) = 0 Then
+			oLogging.CreateEntry "OSDImageName is not defined in the MDT environment, and was not provided on the command line.  Exiting...", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		End If
+		
+		If Wscript.arguments.named.Exists("Model") Then
+			oLogging.CreateEntry "Model argument provided on the command line.  Overriding oEnvironment setting.", LogTypeWarning
+			Model =  Wscript.arguments.named.Item("Model")
+		Else
+			Model = oEnvironment.Item("Model")
+		End If
+		oLogging.CreateEntry "Model variable now is: " & Model, LogTypeInfo
+        
+		Set oRegEx = New RegExp
+        oRegEx.Global = True
+        oRegEx.IgnoreCase = True
+	  
+        'Modify the detected model name to handle known variations:
+		oRegEx.pattern = "Latitude"
+        if oRegEx.test(Model) then
+            oLogging.CreateEntry "Model is a Latitude.  Cleaning up the model name...", LogTypeInfo
+            oRegEx.pattern = " "
+            set oMatch = oRegEx.Execute(Model)
+            'wscript.echo "oMatch Count is: " & oMatch.count
+            if oMatch.Count > 1 then
+				i = oMatch.item(1).FirstIndex
+				Model = Left(Model,i)
+				oLogging.CreateEntry "Model is now: " & Model, LogTypeInfo
+            end if
+        end if
+        oRegEx.pattern = "Venue 11 Pro 713"
+        if oRegEx.test(Model) then
+            oLogging.CreateEntry "Model is a Venue 11 Pro 713x.  Cleaning up the model name...", LogTypeInfo
+            oRegEx.pattern = "713"
+            set oMatch = oRegEx.Execute(Model)
+            'wscript.echo "oMatch Count is: " & oMatch.count
+            i = oMatch.item(0).FirstIndex
+            'wscript.echo "index of match is: " & i
+            Model = Left(Model,i+3)
+            oLogging.CreateEntry "Model is now: " & Model, LogTypeInfo
+        end if
+		
+		'Lookup the Windows version string for this image from the OSImages dictionary (loaded from file).
+		'Exit if the image is not listed.
+        If OSImages.Exists(OSDImageName) Then
+            WinVer = OSImages.Item(OSDImageName)
+        Else
+			oLogging.CreateEntry "Selected image was not found in the CSV list of available images.", LogTypeError
+			oLogging.CreateEntry "Searched for: " & OSDImageName, LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+            exit function
+        End If
+
+        dict_key = WinVer & "-" & Model
+		oLogging.CreateEntry "Looking for driver category entry: " & dict_key, LogTypeInfo
+        If driverCats.Exists(dict_key) Then
+            'Lookup the driver category ID string from the driverCats dictionary (loaded from file):
+            myCat =  driverCats.Item(dict_key)
+			Out = CStr("Found entry for " & dict_key & " = " & myCat)
+            oLogging.CreateEntry Out, LogTypeInfo
+        'If we are dealing with a Windows 8 image, then check for Windows 7 drivers when Win8 drivers can't be found:
+        ElseIf InStr(WinVer,"Win8") Then
+			Out = "No entry found for " & dict_key & " in the Windows 8 driver categories.  Now looking in the Windows 7 driver categories."
+			oLogging.CreateEntry Out, LogTypeWarning
+            WinVer = "Win7"
+            dict_key = WinVer & "-" & Model
+			If driverCats.Exists(dict_key) Then
+				myCat =  driverCats.Item(dict_key)
+				Out =  CStr("Found entry for " & dict_key & " = " & myCat)
+				oLogging.CreateEntry Out, LogTypeInfo
+			Else 
+				myCat = ""
+				Out = "No entry found for this model."
+				oLogging.CreateEntry Out, LogTypeInfo
+			End If
+        Else
+            myCat = ""
+			Out = "No entry found for this model."
+			oLogging.CreateEntry Out, LogTypeInfo
+        End If
+
+        If Len(myCat) > 0 Then
+            dict_key = "Other-noArch"
+            If driverCats.Exists(dict_key) Then
+                myCat =  myCat & "," & driverCats.Item(dict_key)
+            End If
+            dict_key = "Other-x86"
+            If driverCats.Exists(dict_key) Then
+                myCat =  myCat & "," & driverCats.Item(dict_key)
+            End If
+            dict_key = "Other-x64"
+            If driverCats.Exists(dict_key) Then
+                myCat =  myCat & "," & driverCats.Item(dict_key)
+            End If
+            Out = Model & " will use driver categories: " & myCat
+			oLogging.CreateEntry Out, LogTypeInfo
+			oEnvironment.Item("UVMDriverCatSet") = "YES"
+			oEnvironment.Item("UVMDriverCatList") = myCat
+			oEnvironment.Item("OSDAutoApplyDriverCategoryList") = myCat
+			' oEnvironment object will report success or failure of this command on its own.
+        Else
+			Out = "Unsupported Model. Clearing the Driver Categories List."
+            oLogging.CreateEntry Out, LogTypeInfo
+        End If
+		
+		iRetVal = Success
+		Main = iRetVal
+
+    End Function
+
+	'Looks like I won't need the SetTaskSequenceVariable/GetTaskSequenceVariable functions after all.  Remove them later...
+
+    REM Function SetTaskSequenceVariable(tsVar,tsValue)
+        REM dim tsEnv: set tsEnv = CreateObject("Microsoft.SMS.TSEnvironment")
+        REM dim oldTsValue
+
+        REM ' You can query the environment to get an existing variable.
+        REM oldTsValue = tsEnv(tsVar)
+
+        REM 'Some attempt here to figure out what we are getting back from SCCM:
+        REM '   http://www.w3schools.com/vbScript/func_vartype.asp
+        REM '   https://msdn.microsoft.com/en-us/library/ie/y58s1cs6(v=vs.84).aspx
+        REM ' (Note that "TypeName()" likely is the function that we want to use here, not VarType()
+        REM 'Wscript.echo "Variable is of type: " & TypeName(oldTsValue)
+        REM ' Set variable:
+        REM tsEnv(tsVar) = tsValue
+    REM End Function
+
+    REM Function GetTaskSequenceVariable(tsValue)
+        REM dim tsEnv: set tsEnv = CreateObject("Microsoft.SMS.TSEnvironment")
+        REM GetTaskSequenceVariable = tsEnv(tsVar)
+    REM End Function
+
+    Function load_dict(dict_name,file_name)
+        Dim objFSO,objText,line,pair_array,index,item
+        Const ForReading = 1, ForWriting = 2, ForAppending = 8, ReadOnly = 1
+
+        Set objFSO = CreateObject("Scripting.FileSystemObject")  'Create file object
+        Set objText = objFSO.OpenTextFile(file_name, ForReading) 'Open for read
+
+        Do Until objText.AtEndOfStream        'Read to end of file
+            line = objText.ReadLine                  'Read line from file
+            'wscript.echo line
+            pair_array = split(line,",")             'Split Index-Item pair
+            index = pair_array(0) 'Decode Index
+            item  = pair_array(1) 'Decode Item
+            dict_name.Add index,item  'Add to Dictionary
+        Loop                                      'Read another line
+        objText.Close
+    End Function
+
+End Class
+
+</script>
+</job>
