@@ -1,0 +1,83 @@
+Other-noArch,DriverCategories:e600f2e0-86eb-4322-a371-f642b5e14f06
+Other-x64,DriverCategories:7eeb0dc6-dcc9-4524-aab3-0b3e9ceac29c
+Other-x86,DriverCategories:301d6bd8-e838-4767-a05c-0605d2e4fb90
+Peripherals-noArch,DriverCategories:e8313f4b-719f-43a6-aae7-7c58214e9850
+Peripherals-x64,DriverCategories:8ac408b5-9523-4199-9036-c64139fc7d42
+Peripherals-x86,DriverCategories:26f1c150-b9ee-4460-b0ea-86f3cb7e5b80
+Win7-Latitude E6500,DriverCategories:9dca1b9f-e331-43c8-beb4-ea711d8063e1
+Win8-Latitude E7440,DriverCategories:f6a93b7f-a07b-463d-89c9-200d9228b4dd
+WinPE-5.0-x64,DriverCategories:6813b864-2a1b-4500-8806-25112ac00256
+WinPE-5.0-x86,DriverCategories:fa15e1e3-689a-4534-8764-e4e782eea73d
+Win7-Latitude E6400,DriverCategories:281e1920-d06a-4bd4-b770-b159f3a297aa
+Win7-Latitude 3440,DriverCategories:4016ddc2-3882-431a-be1e-a1156730e1dc
+Win7-Latitude E4300,DriverCategories:a521f594-7779-43c0-bb12-5453fb53cbff
+Win7-Latitude E4310,DriverCategories:06846e19-67fb-4e1b-ab36-a4760fd20a0c
+Win7-Latitude E5430,DriverCategories:707cb761-f476-4012-a111-e63329cb16fc
+Win7-Latitude E5440,DriverCategories:79b3a09a-9398-40e4-b6b2-805a4f9e610a
+Win7-Latitude E6320,DriverCategories:8f5577ca-6409-4161-b36c-b3a46aa8188c
+Win7-Latitude E6330,DriverCategories:561140ba-5d0d-49b5-9aaa-5c6f646a5195
+Win7-Latitude E6410,DriverCategories:f14ba911-4e03-47e8-9a7a-799f1e7fc2f6
+Win7-Latitude E6420,DriverCategories:42507726-887a-46f5-894b-99d979e0e8d8
+Win7-Latitude E6430,DriverCategories:7517239f-df38-438e-bb19-101732db230e
+Win7-Latitude E6440,DriverCategories:40f3077b-229a-4e80-ac83-462ae2eb3bfa
+Win7-Latitude E6510,DriverCategories:9091ab45-625a-4eef-b2f0-95da4acdad23
+Win7-Latitude E6520,DriverCategories:aaf51096-0615-40d2-a656-f05bb9b123e9
+Win7-Latitude E6530,DriverCategories:1f2d091c-f613-46be-a755-87721fe0eb7d
+Win7-Latitude E6540,DriverCategories:05340a9c-eb63-48f0-a1c8-16aea886055a
+Win7-Latitude XT2,DriverCategories:a71f3925-498a-435a-9b95-50c53a6beb36
+Win7-Latitude XT3,DriverCategories:14b6c7a4-33ef-4077-9d8d-2187acaf9edb
+Win7-OptiPlex 3020,DriverCategories:41c3d697-dcdd-4fc0-b07c-f36233e77c67
+Win7-Optiplex 380,DriverCategories:b60dd7ed-92e4-4b79-8660-a11403d3b5c4
+Win7-Optiplex 7010,DriverCategories:6b92ff51-b734-460e-bd25-29df14edc406
+Win7-Optiplex 7020,DriverCategories:25a28e03-f9f7-4431-827a-44c63c28e1a2
+Win7-Optiplex 755,DriverCategories:29e4dcf3-7e45-4f78-bef2-f0089900140a
+Win7-Optiplex 760,DriverCategories:20b2e2aa-a9be-4360-b814-f2c234f4c9be
+Win7-Optiplex 780,DriverCategories:c43e22ec-a733-434e-b7ea-086c97ba1148
+Win7-Optiplex 790,DriverCategories:0bd1bffc-01fa-4b91-87d8-21d628d7e50f
+Win7-Optiplex 9020,DriverCategories:437b92c2-2218-4da5-ae0a-59334fbe94d5
+Win7-Optiplex 9020M,DriverCategories:2eb574a5-b148-465c-b589-f154863cdd30
+Win7-Optiplex 960,DriverCategories:9ddfb4a5-e8c5-406a-94c1-3ec12cc0ee11
+Win7-Optiplex 990,DriverCategories:8c5f8fd7-2ae7-41d3-9e5a-5dff5ece9658
+Win7-Precision M4800,DriverCategories:c0de72f2-5c4c-4109-8d2d-23ea01218c66
+Win7-Precision T3600,DriverCategories:26362156-b5cd-4196-8560-ddbcb69cb134
+Win7-Precision T3610,DriverCategories:124c130b-e4fe-4bea-b1b9-43e0eea04a84
+Win7-Virtual Machine,DriverCategories:9d091085-b3d1-4add-9349-b00133e617cf
+Win7-VMware Virtual Platform,DriverCategories:cb91c647-5224-41b9-a27b-18bbb1211c9a
+Win8-Dell Precision M3800,DriverCategories:4e26841b-eda5-49db-b403-6c02da8bd569
+Win8-Dell System XPS L321X,DriverCategories:fab18eb2-5cc6-49cb-89ec-e20512de95cc
+Win8-Dell System XPS L322X,DriverCategories:28be3b7f-16ae-4a28-b982-b03b6a4e6b94
+Win8-Laitiude E5450,DriverCategories:507fa955-153d-437f-b178-13f023c63c7b
+Win8-Latitude 10 - ST2,DriverCategories:2a2ccec9-607a-444a-906c-261f31bd45cb
+Win8-Latitude 3440,DriverCategories:fd284033-0b41-4d08-92dd-a0ad7a68690c
+Win8-Latitude E5430,DriverCategories:a24d3f42-4752-45d9-af34-4c91da09e631
+Win8-Latitude E5440,DriverCategories:3805ca3d-460f-4777-aeab-7a565d14da42
+Win8-Latitude E5540,DriverCategories:74d680f9-f70b-4c49-af5a-9eca35288f8e
+Win8-Latitude E5550,DriverCategories:c74461f4-534f-439e-99c6-e2d19789964c
+Win8-Latitude E6320,DriverCategories:3c470e90-2bc1-428c-a0a3-76205f273c66
+Win8-Latitude E6330,DriverCategories:7330bb28-5fa4-4b4f-b1c2-f90c963cb04c
+Win8-Latitude E6420,DriverCategories:35ed2e68-2ec3-441b-96ac-7c28dc33cc29
+Win8-Latitude E6430,DriverCategories:7ecaf106-e9e1-47b2-9aaa-50417e67e411
+Win8-Latitude E6440,DriverCategories:a4b38ad5-a659-49ae-ae3b-d14ef07b634f
+Win8-Latitude E6520,DriverCategories:ea4a2e2a-9e1a-4b32-86e5-b9c21212fb39
+Win8-Latitude E6530,DriverCategories:f2d9188e-3bbc-4340-a12b-0841cab6e99e
+Win8-Latitude E7240,DriverCategories:0624f9c8-9101-4452-89ef-1faae71a86d9
+Win8-Latitude E7250,DriverCategories:19225541-72f6-4359-9d6b-adbf96c5d644
+Win8-Latitude E7450,DriverCategories:b44f4457-7949-476b-ae53-e424e3f76c24
+Win8-OptiPlex 3010,DriverCategories:c9df7dca-1285-4de4-a4a6-24a201680e12
+Win8-OptiPlex 3020,DriverCategories:8185b135-087a-4c86-b575-46a541373680
+Win8-OptiPlex 7010,DriverCategories:ae2011b9-223c-4a4c-9cda-ff6e7bd4ce57
+Win8-Optiplex 7020,DriverCategories:b717f077-7a0f-4c28-8b6c-f075666fc980
+Win8-OptiPlex 9010,DriverCategories:154d449d-54c6-4bb5-9328-2854d9dfb460
+Win8-OptiPlex 9020,DriverCategories:7c3f229a-4d1b-4e1b-b447-737c27ece71b
+Win8-Optiplex 9020M,DriverCategories:0ce04e47-84d9-4492-859f-2611c726a835
+Win8-Optiplex 9030 AIO,DriverCategories:faadd188-3a39-42b5-b584-cfc4032c3404
+Win8-OptiPlex XE2,DriverCategories:05dde52c-feef-4a3e-9f6b-a3ee7a860fbf
+Win8-Precision M4800,DriverCategories:90f762de-3085-4fef-bf9b-2b068dc221d5
+Win8-Precision T3610,DriverCategories:38a790f7-0232-4192-abf7-afb22e724121
+Win8-Venue 11 Pro 713,DriverCategories:6114a870-7e4d-463f-99fa-ce10acdb414d
+Win8-Venue 11 Pro 7140,DriverCategories:3553d4db-d101-484d-b106-edf09edd477e
+Win8-Venue 8 Pro 5830,DriverCategories:d33620d3-b50e-4d25-9ffe-a257e1ef67b4
+Win8-XPS 12 9Q23,DriverCategories:46ac6e4f-1175-44e9-aace-c225f3af736d
+Win8-XPS 12-9Q33,DriverCategories:4b309ee8-51d3-47b1-b787-50e7ba5bc442
+Win8-XPS L421Q,DriverCategories:c0d0f0f2-8e46-4a6b-b684-9c301555189c
+Win8-XPS13 9333,DriverCategories:f0d8c590-0905-4e5b-9171-c7898313ec38

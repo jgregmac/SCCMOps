@@ -1,0 +1,379 @@
+<INSTANCE CLASSNAME="SMS_TaskSequencePackage">
+  <QUALIFIER NAME="dynamic" PROPAGATED="true" TYPE="boolean" TOSUBCLASS="false" TOINSTANCE="true">
+    <VALUE>TRUE</VALUE>
+  </QUALIFIER>
+  <QUALIFIER NAME="SecurityVerbs" TYPE="sint32" TOSUBCLASS="false">
+    <VALUE>-1</VALUE>
+  </QUALIFIER>
+  <PROPERTY NAME="__PATH" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>\\2012-R2-CAS\root\sms\site_CA2:SMS_TaskSequencePackage.PackageID="CA200050"</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__NAMESPACE" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>root\sms\site_CA2</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__SERVER" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>2012-R2-CAS</VALUE>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="__DERIVATION" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE.ARRAY>
+      <VALUE>SMS_PackageBaseclass</VALUE>
+      <VALUE>SMS_BaseClass</VALUE>
+    </VALUE.ARRAY>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="__PROPERTY_COUNT" CLASSORIGIN="___SYSTEM" TYPE="sint32">
+    <VALUE>57</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__RELPATH" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>SMS_TaskSequencePackage.PackageID="CA200050"</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__DYNASTY" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>SMS_BaseClass</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__SUPERCLASS" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>SMS_PackageBaseclass</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__CLASS" CLASSORIGIN="___SYSTEM" TYPE="string">
+    <VALUE>SMS_TaskSequencePackage</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="__GENUS" CLASSORIGIN="___SYSTEM" TYPE="sint32">
+    <VALUE>2</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ActionInProgress" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="AlternateContentProviders" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="BootImageID" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Category" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="CustomProgressMsg" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="DependentProgram" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Description" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Duration" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>360</VALUE>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="ExtendedData" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint8">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint8</VALUE>
+    </QUALIFIER>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="ExtendedDataSize" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ForcedDisconnectDelay" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>5</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ForcedDisconnectEnabled" CLASSORIGIN="SMS_PackageBaseclass" TYPE="boolean">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>boolean</VALUE>
+    </QUALIFIER>
+    <VALUE>FALSE</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ForcedDisconnectNumRetries" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>2</VALUE>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="Icon" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint8">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint8</VALUE>
+    </QUALIFIER>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="IconSize" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="IgnoreAddressSchedule" CLASSORIGIN="SMS_PackageBaseclass" TYPE="boolean">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>boolean</VALUE>
+    </QUALIFIER>
+    <VALUE>FALSE</VALUE>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="ISVData" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint8">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint8</VALUE>
+    </QUALIFIER>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="ISVDataSize" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="IsVersionCompatible" CLASSORIGIN="SMS_PackageBaseclass" PROPAGATED="true" TYPE="boolean">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>boolean</VALUE>
+    </QUALIFIER>
+  </PROPERTY>
+  <PROPERTY NAME="Language" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="LastRefreshTime" CLASSORIGIN="SMS_PackageBaseclass" TYPE="datetime">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>datetime</VALUE>
+    </QUALIFIER>
+    <VALUE>20140425165621.000000+000</VALUE>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="LocalizedCategoryInstanceNames" CLASSORIGIN="SMS_PackageBaseclass" PROPAGATED="true" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="Manufacturer" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="MIFFilename" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="MIFName" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="MIFPublisher" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="MIFVersion" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Name" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE>Delete Mounted Devices</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="NumOfPrograms" CLASSORIGIN="SMS_PackageBaseclass" PROPAGATED="true" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+  </PROPERTY>
+  <PROPERTY NAME="PackageID" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <QUALIFIER NAME="key" PROPAGATED="true" TYPE="boolean" OVERRIDABLE="false" TOINSTANCE="true">
+      <VALUE>TRUE</VALUE>
+    </QUALIFIER>
+    <VALUE>CA200050</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="PackageSize" CLASSORIGIN="SMS_PackageBaseclass" PROPAGATED="true" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+  </PROPERTY>
+  <PROPERTY NAME="PackageType" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>4</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="PkgFlags" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="PkgSourceFlag" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="PkgSourcePath" CLASSORIGIN="SMS_PackageBaseclass" PROPAGATED="true" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="PreferredAddressType" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Priority" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>2</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ProgramFlags" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>152084496</VALUE>
+  </PROPERTY>
+  <PROPERTY.OBJECTARRAY NAME="References" CLASSORIGIN="SMS_TaskSequencePackage" REFERENCECLASS="SMS_TaskSequence_Reference">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>object:SMS_TaskSequence_Reference</VALUE>
+    </QUALIFIER>
+  </PROPERTY.OBJECTARRAY>
+  <PROPERTY NAME="ReferencesCount" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="RefreshPkgSourceFlag" CLASSORIGIN="SMS_PackageBaseclass" TYPE="boolean">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>boolean</VALUE>
+    </QUALIFIER>
+    <VALUE>FALSE</VALUE>
+  </PROPERTY>
+  <PROPERTY.OBJECTARRAY NAME="RefreshSchedule" CLASSORIGIN="SMS_PackageBaseclass" REFERENCECLASS="SMS_ScheduleToken">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>object:SMS_ScheduleToken</VALUE>
+    </QUALIFIER>
+  </PROPERTY.OBJECTARRAY>
+  <PROPERTY NAME="Reserved" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+  </PROPERTY>
+  <PROPERTY.ARRAY NAME="SecuredScopeNames" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE.ARRAY>
+      <VALUE>Default</VALUE>
+    </VALUE.ARRAY>
+  </PROPERTY.ARRAY>
+  <PROPERTY NAME="SedoObjectVersion" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE>5E1FF37B-1EC1-4FC2-9642-4E13975A6393</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Sequence" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE><![CDATA[<sequence version="3.00"><group name="Delete Mounted Devices" description="The tasks in this group removes the drive letters in the full OS as determined by ConfigMgr and instead allows Windows to determine what the drive letters will be. Add this group between the Apply Operating System Image and Setup Windows and ConfigMgr task"><step type="SMS_TaskSequence_RunCommandLineAction" name="Load Registry SYSTEM Hive" description="Loads the SYSTEM registry hive from the OS applied at the Apply Operating System Image task" continueOnError="true" runIn="WinPEandFullOS" successCodeList="0 3010" runFromNet="false"><action>smsswd.exe /run: Reg.exe load HKLM\Temp %OSDTargetSystemDrive%\Windows\system32\config\system</action><defaultVarList><variable name="CommandLine" property="CommandLine" hidden="true">Reg.exe load HKLM\Temp %OSDTargetSystemDrive%\Windows\system32\config\system</variable><variable name="SMSTSDisableWow64Redirection" property="DisableWow64Redirection">false</variable><variable name="_SMSTSRunCommandLineAsUser" property="RunAsUser">false</variable><variable name="SuccessCodes" property="SuccessCodes" hidden="true">0 3010</variable></defaultVarList></step><step type="SMS_TaskSequence_RunCommandLineAction" name="Delete MountedDevices from Registry" description="Deletes all of the registry values under the MountedDevices key  from the OS applied at the Apply Operating System Image task" continueOnError="true" runIn="WinPEandFullOS" successCodeList="0 3010" runFromNet="false"><action>smsswd.exe /run: Reg.exe delete HKLM\Temp\MountedDevices /va /f</action><defaultVarList><variable name="CommandLine" property="CommandLine" hidden="true">Reg.exe delete HKLM\Temp\MountedDevices /va /f</variable><variable name="SMSTSDisableWow64Redirection" property="DisableWow64Redirection">false</variable><variable name="_SMSTSRunCommandLineAsUser" property="RunAsUser">false</variable><variable name="SuccessCodes" property="SuccessCodes" hidden="true">0 3010</variable></defaultVarList></step><step type="SMS_TaskSequence_RunCommandLineAction" name="Unmount Registry System Hive" description="Unmounts the SYSTEM registry hive previously loaded" continueOnError="true" runIn="WinPEandFullOS" successCodeList="0 3010" runFromNet="false"><action>smsswd.exe /run: Reg.exe unload HKLM\Temp</action><defaultVarList><variable name="CommandLine" property="CommandLine" hidden="true">Reg.exe unload HKLM\Temp</variable><variable name="SMSTSDisableWow64Redirection" property="DisableWow64Redirection">false</variable><variable name="_SMSTSRunCommandLineAsUser" property="RunAsUser">false</variable><variable name="SuccessCodes" property="SuccessCodes" hidden="true">0 3010</variable></defaultVarList></step></group></sequence>
+]]></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ShareName" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="ShareType" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="SourceDate" CLASSORIGIN="SMS_PackageBaseclass" TYPE="datetime">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>datetime</VALUE>
+    </QUALIFIER>
+    <VALUE>20140425164715.000000+000</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="SourceSite" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE>CA2</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="SourceVersion" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="StoredPkgPath" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="StoredPkgVersion" CLASSORIGIN="SMS_PackageBaseclass" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY.OBJECTARRAY NAME="SupportedOperatingSystems" CLASSORIGIN="SMS_TaskSequencePackage" REFERENCECLASS="SMS_OS_Details">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>object:SMS_OS_Details</VALUE>
+    </QUALIFIER>
+    <VALUE.OBJECTARRAY></VALUE.OBJECTARRAY>
+  </PROPERTY.OBJECTARRAY>
+  <PROPERTY NAME="TaskSequenceFlags" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>0</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Type" CLASSORIGIN="SMS_TaskSequencePackage" TYPE="uint32">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>uint32</VALUE>
+    </QUALIFIER>
+    <VALUE>1</VALUE>
+  </PROPERTY>
+  <PROPERTY NAME="Version" CLASSORIGIN="SMS_PackageBaseclass" TYPE="string">
+    <QUALIFIER NAME="CIMTYPE" PROPAGATED="true" TYPE="string" TOINSTANCE="true">
+      <VALUE>string</VALUE>
+    </QUALIFIER>
+    <VALUE></VALUE>
+  </PROPERTY>
+</INSTANCE>
