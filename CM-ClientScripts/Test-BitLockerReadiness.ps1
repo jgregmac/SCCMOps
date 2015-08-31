@@ -15,7 +15,7 @@ Set-PSDebug -Strict
 
 #Set an arbitrary date which represents a cut-off for BitLocker support.  
 # Bios older than this date will be considered "too old to be supported".
-$noSuppDate = [datetime] '2009-01-01'
+$noSuppDate = [datetime] '2010-01-01'
 Write-Verbose ('Date before which the system will be considered too old to run BitLocker: ' + $noSuppDate)
 
 ##### Age test: #####
