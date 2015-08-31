@@ -1,0 +1,1 @@
+\\confman3\SMS_UVM\Client\ccmsetup.exe /noservice /usePKICert SMSSITECODE=UVM CCMHOSTNAME="wincenter.uvm.edu" SMSMP="confman3.campus.ad.uvm.edu"
