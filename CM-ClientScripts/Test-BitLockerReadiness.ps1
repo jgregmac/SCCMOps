@@ -68,6 +68,16 @@ try {
     Write-Error $out
 }
 if ($os.caption -match 'Windows 7 ') {
+    ##### PGP Test: #####
+    [string]$PGPLeaf = '\PGP Corporation\PGP Desktop\pgpwde.exe'
+    if ((Test-Path ($env:ProgramFiles + $PGPLeaf)) -or (Test-Path (${env:ProgramFiles(x86)} + $PGPLeaf))) {
+        Write-Verbose 'PGP/Symantec Encryption Software is present.  NO GO!'
+        return $false
+        exit
+    } else {
+        Write-Verbose 'PGP/Symantec Encryption Software is not present.'
+    }
+    ##### TPM Test: #####
     try {
         $tpm = Get-WmiObject -Namespace root/cimv2/security/MicrosoftTpm -Class Win32_Tpm -ErrorAction SilentlyContinue
     } catch {
