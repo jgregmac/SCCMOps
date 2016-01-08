@@ -18,12 +18,25 @@ Set-PSDebug -Strict
 $noSuppDate = [datetime] '2010-01-01'
 Write-Verbose ('Date before which the system will be considered too old to run BitLocker: ' + $noSuppDate)
 
+##### Battery Test: #####
+try {
+    $battery = Get-WmiObject -Namespace root/cimv2 -Class Win32_Battery -ErrorAction Stop
+} catch {
+    Write-Error "Could not process WMI query for BIOS information."
+}
+if (($battery.BatteryStatus -ne $null) -and ($battery.BatteryStatus -ne '0')) {
+    Write-Verbose 'System battery detected.  Assuming the system is a laptop.'
+} else {
+    Write-Verbose 'System has no battery, and therefore is not a laptop.  NO GO!'
+    return $false
+    exit
+}
+
 ##### Age test: #####
 try {
     $bios = Get-WmiObject -Namespace root/cimv2 -Class Win32_Bios -ErrorAction Stop
 } catch {
-    [string]$out = "Could not process WMI query for BIOS information."
-    Write-Error $out
+    Write-Error "Could not process WMI query for BIOS information."
 }
 if ($bios.ReleaseDate -ne $null) {
     $biosDate = [System.Management.ManagementDateTimeConverter]::ToDateTime($bios.ReleaseDate)
@@ -43,21 +56,6 @@ if (-not $newEnough) {
     exit
 } else {
     Write-Verbose 'System appears to be new enough to support BitLocker.'
-}
-
-##### Battery Test: #####
-try {
-    $battery = Get-WmiObject -Namespace root/cimv2 -Class Win32_Battery -ErrorAction Stop
-} catch {
-    [string]$out = "Could not process WMI query for BIOS information."
-    Write-Error $out
-}
-if (($battery.BatteryStatus -ne $null) -and ($battery.BatteryStatus -ne '0')) {
-    Write-Verbose 'System battery detected.  Assuming the system is a laptop.'
-} else {
-    Write-Verbose 'System has no battery, and therefore is not a laptop.  NO GO!'
-    return $false
-    exit
 }
 
 ##### Win7 Test: #####

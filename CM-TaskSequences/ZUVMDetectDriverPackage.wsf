@@ -1,0 +1,205 @@
+<job id="zUVMDetectDriverPackage">
+<script language="VBScript" src="ZTIUtility.vbs"/>
+<script language="VBScript">
+
+Option Explicit
+RunNewInstance
+
+'//--------------------------------------------------------
+'// Main Class
+'//--------------------------------------------------------
+Class zUVMDetectDriverPackage
+    
+    '//--------------------------------------------------------
+    '//  Constructor to initialize needed global objects
+    '//--------------------------------------------------------
+    Private Sub Class_Initialize
+    End Sub
+    
+    '//--------------------------------------------------------
+    '// Main routine
+    '//--------------------------------------------------------
+
+    Function Main()
+    ' //*******************************************************
+    ' //
+    ' // File: ZUVMDetectDriverPackage.wsf
+    ' //
+    ' // Purpose: Script to determine the name of the driver package to be 
+    ' //   applied to the operating system in the running task sequence.  Reads
+    ' //   driver category and OS Image information from files generated 
+    ' //   in PowerShell.
+    ' //
+    ' // Usage: cscript zUVM-SetDriverCategories.wsf [/Model:ComputerModel] [/OSDImageName:WIMImageName] [/debug:true]
+	' //     Model and OSDImageName arguments are for debugging, and will override the variables in the current deployment environment.
+    ' //
+    ' //*******************************************************
+
+        Dim catFile, catFilePath, csProp, dict_key, imageFile, imageFilePath, OSDImageName, Make, Model, Out, WinVer 'String variables
+        Dim driverCats, OSImages, oMatch, oRegEx 'Objects
+		Dim i, iRetVal
+
+        Set driverCats = createObject("Scripting.Dictionary")
+        Set OSImages = createObject("Scripting.Dictionary")
+		
+		'Set initial value for "UVMDriverCatSet".  We will set this to "YES" if we find a matching driver category later.
+		oEnvironment.Item("UVMDriverPackageDetected") = "NO"
+
+        catFile = "zUVM-DriverCategories.csv"
+        imageFile = "zUVM-OSImages.csv"
+		
+		'Test to see if image/driver information files are present.  Exit if they cannot be found.
+		'These two if clauses should be implemented as functions.
+		iRetVal = oUtility.FindFile(catFile, catFilePath)
+		if iRetVal <> Success then
+			oLogging.CreateEntry catFile & " file not found. ", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		end if 
+		oLogging.CreateEntry "Path to " & catFile &": " & catFilePath, LogTypeInfo
+
+		iRetVal = oUtility.FindFile(imageFile, imageFilePath)
+		if iRetVal <> Success then
+			oLogging.CreateEntry imageFile & " file not found. ", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		end if 
+		oLogging.CreateEntry "Path to " & imageFile &": " & imageFilePath, LogTypeInfo
+		
+        'Load the information from the files into scripting dictionary objects.
+        oLogging.CreateEntry  "Loading the driver categories info file into memory...",LogTypeInfo
+		call load_dict(driverCats,catFilePath)
+        oLogging.CreateEntry  "Loading the OS Images info file into memory...",LogTypeInfo
+        call load_dict(OSImages,imageFilePath)
+		
+		'The following two "If Wscript.arguments..." clauses could be implemented as functions... I'll do that when I have time (Ha!).
+		'Use MDT to get Model information:
+		'(Supply a valid image name in the /OSDImageName: argument, such as "Windows 8.1 Update 1 64-bit with Office 2013" for debugging)
+		If Wscript.arguments.named.Exists("OSDImageName") Then
+			Out = "OSDImageName argument provided on the command line. Setting OSDImageName to the supplied argument instead."
+			oLogging.CreateEntry Out, LogTypeWarning
+			OSDImageName =  Wscript.arguments.named.Item("OSDImageName")
+		Else
+			OSDImageName = oEnvironment.Item("OSDImageName")
+		End If
+		
+		'Special handling for the OSDImageName variable... the script should not continue if OSDImageName still is not defined.
+		'wscript.echo "OSDImageName is of length: " & Len(OSDImageName)
+		oLogging.CreateEntry "Selected OSDImageName now is: " & OSDImageName, LogTypeInfo
+		If Len(OSDImageName) = 0 Then
+			oLogging.CreateEntry "OSDImageName is not defined in the MDT environment, and was not provided on the command line.  Exiting...", LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+			exit function
+		End If
+		
+		If Wscript.arguments.named.Exists("Model") Then
+			oLogging.CreateEntry "Model argument provided on the command line.  Overriding oEnvironment setting.", LogTypeWarning
+			Model =  Wscript.arguments.named.Item("Model")
+		Else
+			Model = oEnvironment.Item("Model")
+		End If
+		oLogging.CreateEntry "Model variable now is: " & Model, LogTypeInfo
+        
+		Set oRegEx = New RegExp
+        oRegEx.Global = True
+        oRegEx.IgnoreCase = True
+	  
+        'Modify the detected model name to handle known variations:
+		oRegEx.pattern = "Latitude"
+        if oRegEx.test(Model) then
+            oLogging.CreateEntry "Model is a Latitude.  Cleaning up the model name...", LogTypeInfo
+            oRegEx.pattern = " "
+            set oMatch = oRegEx.Execute(Model)
+            'wscript.echo "oMatch Count is: " & oMatch.count
+            if oMatch.Count > 1 then
+				i = oMatch.item(1).FirstIndex
+				Model = Left(Model,i)
+				oLogging.CreateEntry "Model is now: " & Model, LogTypeInfo
+            end if
+        end if
+        oRegEx.pattern = "Venue 11 Pro 713"
+        if oRegEx.test(Model) then
+            oLogging.CreateEntry "Model is a Venue 11 Pro 713x.  Cleaning up the model name...", LogTypeInfo
+            oRegEx.pattern = "713"
+            set oMatch = oRegEx.Execute(Model)
+            'wscript.echo "oMatch Count is: " & oMatch.count
+            i = oMatch.item(0).FirstIndex
+            'wscript.echo "index of match is: " & i
+            Model = Left(Model,i+3)
+            oLogging.CreateEntry "Model is now: " & Model, LogTypeInfo
+        end if
+		
+		'Lookup the Windows version string for this image from the OSImages dictionary (loaded from file).
+		'Exit if the image is not listed.
+        If OSImages.Exists(OSDImageName) Then
+            WinVer = OSImages.Item(OSDImageName)
+        Else
+			oLogging.CreateEntry "Selected image was not found in the CSV list of available images.", LogTypeError
+			oLogging.CreateEntry "Searched for: " & OSDImageName, LogTypeError
+			iRetVal = Failure
+			Main = iRetVal
+            exit function
+        End If
+
+        dict_key = WinVer & "-" & Model
+		oLogging.CreateEntry "Looking for driver category entry: " & dict_key, LogTypeInfo
+        If driverCats.Exists(dict_key) Then
+            'Lookup the driver category ID string from the driverCats dictionary (loaded from file):
+			Out = CStr("Found entry for " & dict_key)
+            oLogging.CreateEntry Out, LogTypeInfo
+            oEnvironment.Item("UVMDriverPackageDetected") = "YES"
+            oEnvironment.Item("UVMDriverPackage") = dict_key
+        'If we are dealing with a Windows 8 image, then check for Windows 7 drivers when Win8 drivers can't be found:
+        ' (Note: In MDT/LTI I had logic to set a "MaxOS" version, and a For or While loop to count down to the lowest supported OS.
+        '  We should do that here, too.)
+        ElseIf InStr(WinVer,"Win8") Then
+			Out = "No entry found for " & dict_key & " in the Windows 8 driver categories.  Now looking in the Windows 7 driver categories."
+			oLogging.CreateEntry Out, LogTypeWarning
+            WinVer = "Win7"
+            dict_key = WinVer & "-" & Model
+			If driverCats.Exists(dict_key) Then
+				Out =  CStr("Found entry for " & dict_key)
+                oEnvironment.Item("UVMDriverPackageDetected") = "YES"
+                oEnvironment.Item("UVMDriverPackage") = dict_key
+				oLogging.CreateEntry Out, LogTypeInfo
+			Else 
+				Out = "No entry found for this model. Leaving UVMDriverPackageDetected set to 'NO'."
+				oLogging.CreateEntry Out, LogTypeInfo
+			End If
+        Else
+			Out = "No entry found for this model. Leaving UVMDriverPackageDetected set to 'NO'."
+			oLogging.CreateEntry Out, LogTypeInfo
+        End If
+		
+		iRetVal = Success
+		Main = iRetVal
+
+    End Function
+
+    Function load_dict(dict_name,file_name)
+        Dim objFSO,objText,line,pair_array,index,item
+        Const ForReading = 1, ForWriting = 2, ForAppending = 8, ReadOnly = 1
+
+        Set objFSO = CreateObject("Scripting.FileSystemObject")  'Create file object
+        oLogging.CreateEntry "Opening the script dictionary source file '" &  file_name & "'.",LogTypeInfo
+        Set objText = objFSO.OpenTextFile(file_name, ForReading) 'Open for read
+
+        Do Until objText.AtEndOfStream        'Read to end of file
+            line = objText.ReadLine                  'Read line from file
+            'Uncomment for debugging:
+            'oLogging.CreateEntry "Loading '" & line &"'.",LogTypeInfo
+            pair_array = split(line,",")             'Split Index-Item pair
+            index = pair_array(0) 'Decode Index
+            item  = pair_array(1) 'Decode Item
+            dict_name.Add index,item  'Add to Dictionary
+        Loop                                      'Read another line
+        objText.Close
+    End Function
+
+End Class
+
+</script>
+</job>
